@@ -175,11 +175,9 @@ fi
 
 
 
-###CreateJavaDump
+#CreateJavaDump
 function CreateJavaDump() {
         echo "creating...."
-		
-		
 		
 		
 		
