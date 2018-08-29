@@ -117,11 +117,16 @@ EOF
 	DUMP_NUM=3
 	CPU_USE=400
 
-###输入CPU_USE的值，如果CPU_USE为空，CPU_USE默认400	
-read  -p "请输入CPU_USE的值：" CPU_USE
-if [ -z "${CPU_USE}" ];then        #如果CPU_USE为空
-	CPU_USE=400
-fi
+#read  -p "请输入CPU_USE的值：" CPU_USE
+if [ ! -n "$1" ];then
+       CPU_USE=400
+else
+     CPU_USE="$1"
+    fi
+#echo "$CPU_USE"
+#if [ -z "${CPU_USE}" ];then        #如果CPU_USE为空
+#	CPU_USE=400
+#fi
 #echo "CPU_USE的值是  $CPU_USE"
 
 
