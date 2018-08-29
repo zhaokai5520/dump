@@ -154,9 +154,9 @@ fi
 
 if [[ -f "/app/logs/JMXCONN.class" ]];
 then 
-b=`stat -c %Y /app/logs/JMXCONN.class`
-a=`date +%s`
-	if [ $[ $a - $b ] -gt 86400 ];
+b=`stat -c %Y /app/logs/JMXCONN.class`   #将文件JMXCONN.class修改时间赋值给b
+a=`date +%s`			#从 1970 年 1 月 1 日 00:00:00 UTC 到目前为止的秒数（时间戳）
+	if [ $[ $a - $b ] -gt 86400 ];     #判断java文件编译时间是否大于一天，86400/60/60/=24
 	then
 		if [[ -f "/app/logs/JMXCONN.java" ]];
 		then 
@@ -183,13 +183,20 @@ fi
 #CreateJavaDump
 function CreateJavaDump() {
         echo "creating...."
+		for (( i=1; i<=${JPS_NUM}; i++ ))
+        do
+                pid=$(${JAVA_HOME}"/bin/jps" | grep -v "Jps" | grep -v "AgentServer"| sed -n "${i}p" | awk '{print $1}')  #grep 反转查找 awk 文本分析
+                filename="/app/logs/thread/${pid}.top1.$(date +%Y-%m-%d-%H%M%S).log"
+                /usr/bin/top -H -p ${pid} -bn 1 > $filename  #-bn获取top第一行
+				cpu_used=$(grep java $filename|awk '{s1+=$9}END{print s1}'|awk -F '.' '{print $1}')
+                cd /app/logs
+				result=$(${JAVA_HOME}"/bin/java" JMXCONN)
+				date >>dump_stat
+				echo $result >>dump_stat
+				result_ans=`echo $result |awk '{print $1}'`
+				
 		
-		
-		
-		
-		
-		
-		
+
 		
 		}
 		

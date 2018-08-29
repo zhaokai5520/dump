@@ -30,6 +30,8 @@ shell常见比较字符
 -z    空串				=    两个字符相等				!=    两个字符不等
 -n    非空串
 
+jps(Java Virtual Machine Process Status Tool)是JDK1.5提供的一个显示当前所有java进程pid的命令。显示当前系统的java进程情况及进程id
+使用方法：在当前命令行下打jps(jps存放在JAVA_HOME/bin/jps，使用时为了方便请将JAVA_HOME/bin/加入到Path) 。
 	
 	
 	
